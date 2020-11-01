@@ -1,5 +1,4 @@
 import unittest
-from PIL import Image
 from ImageAlignment import ImageAlignment
 import cv2
 
@@ -11,6 +10,17 @@ class MyTestCase(unittest.TestCase):
 
         # All pixels should match identically
         self.assertTrue((actual_output==expected_output).all())
+
+    def test_align_image(self):
+        test_img_path = "downscaled.png"
+        test_form_path = "Templates/FitnessFormFront.jpg"
+
+        input_img = cv2.imread(test_img_path, cv2.IMREAD_COLOR)
+        input_template = cv2.imread(test_form_path, cv2.IMREAD_COLOR)
+
+        output_img = ImageAlignment().align_images(input_img, input_template)
+        cv2.imwrite("aligned2.png", output_img)
+
 
 
 
